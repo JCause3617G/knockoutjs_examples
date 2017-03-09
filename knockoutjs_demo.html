@@ -1,0 +1,40 @@
+<!-- MVVM (Model, View & ViewModel) -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>First Example of KnockOutJS</title>
+		<script src="knockout.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- This is a *View* - HTML markup that defines the appearance of your UI -->
+		<p>First name: <strong data-bind="text: firstName"></strong></p>
+		<p>Last name: <strong data-bind="text: lastName"></strong></p>
+
+		<p>First name: <input data-bind="value: firstName" /></p>
+		<p>Last name: <input data-bind="value: lastName" /></p>
+
+		<p>Full name: <strong data-bind="text: fullName"></strong></p>
+
+		<!-- View Model Logic -->
+
+		<script type="text/javascript" charset="utf-8">
+			// This is a simple *ViewModel* - JavaScript that defines the data and behavior of your UI
+			function AppViewModel() {
+				//Original Values
+				this.firstName = "Bert";
+				this.lastName = "Bertington";
+
+				//Event Observation
+				this.firstName = ko.observable("Bert");
+				this.lastName = ko.observable("Bertington");
+
+				//Data Operation
+				this.fullName = ko.computed(function() {
+					return this.firstName() + " " + this.lastName();
+				}, this);
+			}
+			// Activates knockout.js
+			ko.applyBindings(new AppViewModel());
+		</script>
+	</body>
+</html>
